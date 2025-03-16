@@ -25,7 +25,7 @@ const App: Component = () => {
             </ul>
           </div>
 
-          <div class="field">
+          <div class="field full-width">
             <label for="email">Email Address</label>
             <input id="email" name="email" type="email" required autocomplete="email"/>
 
@@ -35,27 +35,29 @@ const App: Component = () => {
             </ul>
           </div>
 
-          <div class="field">
+          <div class="field full-width">
             <fieldset>
               <legend>Query Type</legend>
 
-              <div class="radio-button">
-                <input id="general-enquiry" name="query-type" type="radio" value="general-enquiry" required />
-                <label for="general-enquiry">General Enquiry</label>
-              </div>
+              <div class="grid">
+                <label for="general-enquiry"class="radio-button">
+                  <input id="general-enquiry" name="query-type" type="radio" value="general-enquiry" required />
+                  General Enquiry
+                </label>
 
-              <div class="radio-button">
-                <input id="support-request" name="query-type" type="radio" value="support-request" required />
-                <label for="support-request">Support Request</label>
-              </div>
+                <label for="support-request" class="radio-button">
+                  <input id="support-request" name="query-type" type="radio" value="support-request" required />
+                  Support Request
+                </label>
 
-              <ul class="errors">
-                <li><span aria-live="polite">Please select a query type</span></li>
-              </ul>
+                <ul class="errors">
+                  <li><span aria-live="polite">Please select a query type</span></li>
+                </ul>
+              </div>
             </fieldset>
           </div>
 
-          <div class="field">
+          <div class="field full-width">
             <label for="message">Message</label>
             <textarea id="message" name="message" required />
 
@@ -64,16 +66,18 @@ const App: Component = () => {
             </ul>
           </div>
 
-          <div class="field">
-            <input id="consent" name="consent" type="checkbox" required />
-            <label for="consent">I consent to being contacted by the team</label>
+          <div class="field full-width">
+            <label for="consent" class="checkbox">
+              <input id="consent" name="consent" type="checkbox" required />
+              I consent to being contacted by the team
+            </label>
             
             <ul class="errors">
               <li><span aria-live="polite">To submit this form, please consent to being contacted</span></li>
             </ul>
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit" class="full-width">Submit</button>
         </form>
       </main>
 

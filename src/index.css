@@ -1,13 +1,209 @@
-body {
+@font-face {
+	font-family: "Karla";
+	src: url("assets/fonts/static/Karla-Regular.ttf");
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "Karla";
+	src: url("assets/fonts/static/Karla-Bold.ttf");
+	font-weight: 700;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	font: inherit;
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
+	padding: 0;
+}
+
+:root {
+	--white: hsl(0, 0%, 100%);
+
+	--green-200: hsl(148, 38%, 91%);
+	--green-600: hsl(169, 82%, 27%);
+
+	--grey-500: hsl(186, 15%, 59%);
+	--grey-900: hsl(187, 24%, 22%);
+
+	--red: hsl(0, 66%, 54%);
+
+	font-family: "Karla", system-ui, sans-serif;
+	font-size: 16px;
+	font-weight: 400;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+html,
+body,
+#root {
+	inline-size: 100%;
+	block-size: 100%;
+}
+
+body {
+	background-color: var(--green-200);
+	color: var(--grey-900);
+}
+
+#root {
+	display: grid;
+	grid-template-rows: 1fr auto;
+	gap: 1fr;
+	place-items: center;
+	padding: 1rem;
+}
+
+main {
+	inline-size: min(100%, 720px);
+	margin: auto;
+	padding: 2rem;
+	border-radius: .75rem;
+
+	background-color: var(--white);
+}
+
+h1 {
+	font-weight: 700;
+	font-size: 1.5rem;
+	margin-block-end: 1em;
+}
+
+form {
+	--columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+	--gap: 1rem;
+
+	display: grid;
+	grid-template-columns: var(--columns);
+	gap: var(--gap);
+	accent-color: var(--green-600);
+}
+
+.full-width {
+	grid-column: 1 / -1;
+}
+
+textarea {
+	resize: none;
+}
+
+.field {
+	display: grid;
+	gap: 0.5rem;
+
+	/* :is(legend) is not working in Firefox, hence the second selector being needed */
+	& > :is(label:has(+ [required]), [required] + label)::after,
+	& > fieldset:has([required]) legend::after {
+		content: "*";
+		margin-inline-start: 1ch;
+
+		font-size: .75em;
+		vertical-align: text-top;
+
+		color: var(--green-600);
+	}
+
+	& > fieldset {
+		border: none;
+
+    & > legend {
+      margin-block-end: 1rem
+    }
+
+		& > .grid {
+			display: grid;
+			grid-template-columns: var(--columns);
+			gap: var(--gap);
+		}
+	}
+
+	& > :is(input:not([type="checkbox"], [type="radio"]), textarea),
+	& .radio-button {
+		border: 1px solid var(--grey-500);
+		padding: .825em 1.25em;
+		border-radius: .5rem;
+		outline: none;
+
+		&:focus-within {
+			border-color: var(--green-600);
+		}
+	}
+
+  & .radio-button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    & > input {
+      display: none;
+    }
+
+    &:has(> input:checked) {
+      background-color: var(--green-200);
+
+      &::before {
+        background-image: url("assets/images/icon-radio-selected.svg");
+        background-repeat: no-repeat;
+        outline-color: transparent;
+      }
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      inline-size: 21px;
+      block-size: 21px;
+
+      outline: 1px solid var(--grey-500);
+      outline-offset: -2px;
+
+      border-radius: 100vmax;
+    }
+  }
+
+  & > .checkbox {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+
+    & > input {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      inline-size: 18px;
+      aspect-ratio: 1;
+
+      outline: 1px solid var(--grey-500);
+      outline-offset: -2px;
+
+      border-radius: 2px;
+    }
+
+    &:has(> :checked)::before {
+      outline-color: transparent;
+      background-image: url("assets/images/icon-checkbox-check.svg");
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+button {
+  padding: 1em;
+  color: var(--white);
+  border-radius: .5em;
+  font-weight: 700;
+  border: none;
+  background-color: var(--green-600);
+
+}
+
+.errors,
+output {
+	display: none;
 }
