@@ -17,6 +17,7 @@
 	font: inherit;
 	margin: 0;
 	padding: 0;
+	transition-behavior: allow-discrete;
 }
 
 :root {
@@ -93,6 +94,8 @@ textarea {
 
 .field {
 	display: grid;
+	grid-template-rows: auto auto 1fr;
+	align-items: start;
 	gap: 0.5rem;
 
 	/* :is(legend) is not working in Firefox, hence the second selector being needed */
@@ -121,6 +124,13 @@ textarea {
 		}
 	}
 
+	&:has(.errors:not(:empty)):has(:user-invalid) {
+		& > :is(input:not([type="checkbox"], [type="radio"]), textarea),
+		&.radio-button {
+			border-color: var(--red);
+		}
+	}
+
 	& > :is(input:not([type="checkbox"], [type="radio"]), textarea),
 	& .radio-button {
 		border: 1px solid var(--grey-500);
@@ -140,7 +150,12 @@ textarea {
 		cursor: pointer;
 
 		& > input {
-			display: none;
+			position: absolute;
+			display: block;
+			width: 0;
+			height: 0;
+			border: none;
+			outline: none;
 		}
 
 		&:has(> input:checked) {
@@ -166,14 +181,22 @@ textarea {
 		}
 	}
 
+	&:has(> .checkbox) {
+		margin-block: 1.5rem;
+	}
+
 	& > .checkbox {
 		display: flex;
 		gap: 1rem;
 		align-items: start;
-    margin-block: 1.5rem;
 
 		& > input {
-			display: none;
+			position: absolute;
+			display: block;
+			width: 0;
+			height: 0;
+			border: none;
+			outline: none;
 		}
 
 		&::before {
@@ -193,6 +216,15 @@ textarea {
 			background-image: url("assets/images/icon-checkbox-check.svg");
 			background-repeat: no-repeat;
 		}
+	}
+
+	&:not(:has(:user-invalid)) .errors {
+		display: none;
+	}
+
+	& .errors {
+		list-style: none;
+		color: var(--red);
 	}
 }
 
@@ -218,7 +250,44 @@ button {
 	}
 }
 
-.errors,
-output {
-	display: none;
+.success {
+	position: fixed;
+	top: 2rem;
+	left: 50%;
+
+	flex-direction: column;
+	gap: 10px;
+
+	background-color: var(--grey-900);
+	color: var(--white);
+	padding: 1.5rem;
+	border-radius: .75rem;
+
+	& > header {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	& strong {
+		font-size: 1.15rem;
+		font-weight: 700;
+	}
+}
+
+[popover] {
+	translate: -50% calc(-100% - 2rem);
+
+	transition-property: display, overlay, translate;
+	transition-duration: 300ms;
+	transition-timing-function: ease-in-out;
+
+	&:popover-open {
+		display: flex;
+		translate: -50% 0;
+
+		@starting-style {
+			translate: -50% calc(-100% - 2rem);
+		}
+	}
 }

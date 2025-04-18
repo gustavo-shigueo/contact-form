@@ -1,97 +1,145 @@
-import type { Component } from 'solid-js';
+import type { Component } from "solid-js";
+import { Input } from "./components/Input";
+import { Textarea } from "./components/Textarea";
+import { RadioGroup } from "./components/RadioGroup";
+import { Checkbox } from "./components/Checkbox";
+import icon from "./assets/images/icon-success-check.svg";
+
+const EMAIL_REGEX =
+	/^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_'+\-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i;
 
 const App: Component = () => {
-  return (
-    <>
-      <main>
-        <h1>Contact Us</h1>
+	let ref: HTMLDivElement | undefined;
+	return (
+		<>
+			<main>
+				<h1>Contact Us</h1>
 
-        <form id="form">
-          <div class="field">
-            <label for="first-name">First Name</label>
-            <input id="first-name" name="firstName" type="text" required autocomplete="given-name" />
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						ref?.showPopover();
+					}}
+				>
+					<Input
+						label="First Name"
+						name="firstName"
+						type="text"
+						autocomplete="given-name"
+						rules={[
+							{
+								validator: (value) => value.length > 0,
+								message: "This field is required",
+							},
+						]}
+					/>
 
-            <ul class="errors">
-              <li><span aria-live="polite">This field is required</span></li>
-            </ul>
-          </div>
+					<Input
+						label="Last Name"
+						name="lastName"
+						type="text"
+						autocomplete="family-name"
+						rules={[
+							{
+								validator: (value) => value.length > 0,
+								message: "This field is required",
+							},
+						]}
+					/>
 
-          <div class="field">
-            <label for="last-name">Last Name</label>
-            <input id="last-name" name="lastName" type="text" required autocomplete="family-name" />
+					<div class="full-width">
+						<Input
+							label="Email Address"
+							name="email"
+							type="email"
+							autocomplete="family-name"
+							rules={[
+								{
+									validator: (value) => value.length > 0,
+									message: "This field is required",
+								},
+								{
+									validator: (value) => EMAIL_REGEX.test(value),
+									message: "Please enter a valid email address",
+								},
+							]}
+						/>
+					</div>
 
-            <ul class="errors">
-              <li><span aria-live="polite">This field is required</span></li>
-            </ul>
-          </div>
+					<div class="full-width">
+						<RadioGroup
+							name="query-type"
+							label="Query Type"
+							options={[
+								{
+									label: "General Enquiry",
+									value: "general-enquiry",
+								},
+								{
+									label: "support-request",
+									value: "Support Request",
+								},
+							]}
+							rules={[
+								{
+									validator: (value) => value.length > 0,
+									message: "Please select a query type",
+								},
+							]}
+						/>
+					</div>
 
-          <div class="field full-width">
-            <label for="email">Email Address</label>
-            <input id="email" name="email" type="email" required autocomplete="email"/>
+					<div class="full-width">
+						<Textarea
+							label="Message"
+							name="message"
+							rules={[
+								{
+									validator: (value) => value.length > 0,
+									message: "This field is required",
+								},
+							]}
+						/>
+					</div>
 
-            <ul class="errors">
-              <li><span aria-live="polite">Please enter a valid email address</span></li>
-              <li><span aria-live="polite">This field is required</span></li>
-            </ul>
-          </div>
+					<div class="full-width">
+						<Checkbox
+							label="I consent to being contacted by the team"
+							name="consent"
+							rules={[
+								{
+									validator: (value) => value,
+									message:
+										"To submit this form, please consent to being contacted",
+								},
+							]}
+						/>
+					</div>
 
-          <div class="field full-width">
-            <fieldset>
-              <legend>Query Type</legend>
+					<button type="submit" class="full-width">
+						Submit
+					</button>
+				</form>
+			</main>
 
-              <div class="grid">
-                <label for="general-enquiry"class="radio-button">
-                  <input id="general-enquiry" name="query-type" type="radio" value="general-enquiry" required />
-                  General Enquiry
-                </label>
+			<div class="success" ref={ref} popover="auto">
+				<header>
+					<img width="20" src={icon} alt="" />
+					<strong>Message Sent!</strong>
+				</header>
+				<p>Thanks for completing the form. We'll be in touch soon!</p>
+			</div>
 
-                <label for="support-request" class="radio-button">
-                  <input id="support-request" name="query-type" type="radio" value="support-request" required />
-                  Support Request
-                </label>
-
-                <ul class="errors">
-                  <li><span aria-live="polite">Please select a query type</span></li>
-                </ul>
-              </div>
-            </fieldset>
-          </div>
-
-          <div class="field full-width">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required />
-
-            <ul class="errors">
-              <li><span aria-live="polite">This field is required</span></li>
-            </ul>
-          </div>
-
-          <div class="field full-width">
-            <label for="consent" class="checkbox">
-              <input id="consent" name="consent" type="checkbox" required />
-              I consent to being contacted by the team
-            </label>
-            
-            <ul class="errors">
-              <li><span aria-live="polite">To submit this form, please consent to being contacted</span></li>
-            </ul>
-          </div>
-
-          <button type="submit" class="full-width">Submit</button>
-        </form>
-      </main>
-
-      <output form="form">
-        <strong>Message Sent!</strong>
-        <p>Thanks for completing the form. We'll be in touch soon!</p>
-      </output>
-      
-      <div class="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-        Coded by <a href="https://github.com/gustavo-shigueo">Gustavo Shigueo</a>.
-      </div>
-    </>
-  );
+			<div class="attribution">
+				Challenge by{" "}
+				<a href="https://www.frontendmentor.io?ref=challenge">
+					Frontend Mentor
+				</a>
+				. Coded by{" "}
+				<a href="https://github.com/gustavo-shigueo">Gustavo Shigueo</a>.
+			</div>
+		</>
+	);
 };
 
 export default App;
