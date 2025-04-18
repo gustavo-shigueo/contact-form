@@ -11,6 +11,7 @@ type RadioGroupProps = {
 	label: string;
 	name: string;
 	options: RadioOption[];
+	required?: boolean;
 	value?: string;
 	rules?: Rule[];
 };
@@ -50,6 +51,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 									type="radio"
 									value={option.value}
 									checked={props.value === option.value}
+									required={props.required}
 									onChange={(e) => {
 										setValue(e.currentTarget.value);
 									}}

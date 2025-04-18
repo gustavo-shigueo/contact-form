@@ -102,9 +102,9 @@ textarea {
 	& > :is(label:has(+ [required]), [required] + label)::after,
 	& > fieldset:has([required]) legend::after {
 		content: "*";
-		margin-inline-start: 1ch;
+		margin-inline-start: .75ch;
+		font-size: 1.15em;
 
-		font-size: .75em;
 		vertical-align: text-top;
 
 		color: var(--green-600);
@@ -262,6 +262,7 @@ button {
 	color: var(--white);
 	padding: 1.5rem;
 	border-radius: .75rem;
+	border: none;
 
 	& > header {
 		display: flex;

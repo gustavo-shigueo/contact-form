@@ -26,6 +26,7 @@ const App: Component = () => {
 						name="firstName"
 						type="text"
 						autocomplete="given-name"
+						required
 						rules={[
 							{
 								validator: (value) => value.length > 0,
@@ -38,6 +39,7 @@ const App: Component = () => {
 						label="Last Name"
 						name="lastName"
 						type="text"
+						required
 						autocomplete="family-name"
 						rules={[
 							{
@@ -52,6 +54,7 @@ const App: Component = () => {
 							label="Email Address"
 							name="email"
 							type="email"
+							required
 							autocomplete="family-name"
 							rules={[
 								{
@@ -69,6 +72,7 @@ const App: Component = () => {
 					<div class="full-width">
 						<RadioGroup
 							name="query-type"
+							required
 							label="Query Type"
 							options={[
 								{
@@ -76,8 +80,8 @@ const App: Component = () => {
 									value: "general-enquiry",
 								},
 								{
-									label: "support-request",
-									value: "Support Request",
+									label: "Support Request",
+									value: "support-request",
 								},
 							]}
 							rules={[
@@ -92,6 +96,7 @@ const App: Component = () => {
 					<div class="full-width">
 						<Textarea
 							label="Message"
+							required
 							name="message"
 							rules={[
 								{
@@ -105,6 +110,7 @@ const App: Component = () => {
 					<div class="full-width">
 						<Checkbox
 							label="I consent to being contacted by the team"
+							required
 							name="consent"
 							rules={[
 								{
