@@ -1,34 +1,56 @@
-## Usage
+# Frontend Mentor - Contact form solution
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+This is a solution to the [Contact form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/contact-form--G-hYlqKJj). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Table of contents
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+- [Author](#author)
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+**Note: Delete this note and update the table of contents based on what sections you keep.**
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+### The challenge
 
-### `npm run dev` or `npm start`
+Users should be able to:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Complete the form and see a success toast message upon successful submission
+- Receive form validation messages if:
+  - A required field has been missed
+  - The email address is not formatted correctly
+- Complete the form only using their keyboard
+- Have inputs, error messages, and the success message announced on their screen reader
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
 
-The page will reload if you make edits.<br>
+### Screenshot
 
-### `npm run build`
+![](./screenshot.png)
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+### Links
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- Solution URL: [GitHub](https://github.com/gustavo-shigueo/contact-form)
+- Live Site URL: [Live Site](https://gustavo-shigueo.github.io/contact-form)
 
-## Deployment
+## My process
 
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [Solid JS](https://www.solidjs.com/) - JS library
+
+## Author
+
+- GitHun - [gustavo-shigueo](https://github.com/gustavo-shigueo)
+- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/gustavo-shigueo)
+
